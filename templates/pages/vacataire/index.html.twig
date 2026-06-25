@@ -30,9 +30,19 @@
                     <td>{{ vacataire.nom }}</td>
                     <td>
                         <a href="{{ path('vacataire_edit', {'id': vacataire.id}) }}" 
-                           class="btn btn-warning">
+                        class="btn btn-warning">
                             Modifier
                         </a>
+
+                        <form method="post" action="{{ path('vacataire_delete', {'id': vacataire.id}) }}" 
+                            style="display:inline-block"
+                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce vacataire ?');">
+
+                            <button class="btn btn-danger">
+                                Supprimer
+                            </button>
+
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

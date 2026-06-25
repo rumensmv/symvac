@@ -81,4 +81,21 @@ final class VacataireController extends AbstractController
             'vacataire' => $vacataire,
         ]);
     }
+
+    #[Route('/vacataire/{id}/supprimer', name: 'vacataire_delete', methods: ['POST'])]
+    public function delete(
+        Vacataire $vacataire,
+        EntityManagerInterface $manager
+    ): Response
+    {
+        $manager->remove($vacataire);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Le vacataire a été supprimé !'
+        );
+
+        return $this->redirectToRoute('app_vacataire');
+    }
 }
